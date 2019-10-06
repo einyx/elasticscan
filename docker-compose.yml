@@ -65,6 +65,7 @@ services:
       - elasticsearch
 
   masscan:
+    command: 10.11.0.0/16 ‐‐top-ports 100 -oG /tmp/masscan.txt
     build:
       context: masscan/
     volumes:
@@ -73,9 +74,9 @@ services:
         target: /usr/share/kibana/config/kibana.yml
         read_only: true
       - type: bind
-      source: ./logstash/pipeline
-      target: /tmp/
-      read_only: true
+        source: ./logstash/pipeline
+        target: /tmp/
+        read_only: true
     ports:
       - "5601:5601"
     networks:
